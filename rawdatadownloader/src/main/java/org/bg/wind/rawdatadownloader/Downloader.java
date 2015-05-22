@@ -1,5 +1,6 @@
 package org.bg.wind.rawdatadownloader;
 
+import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Transactional
 public class Downloader {
+    final static Logger logger = Logger.getLogger(Downloader.class);
+
 
     //every five minutes
     @Scheduled(cron="0 0/5 * * * ?")
@@ -40,12 +43,10 @@ public class Downloader {
             String command = "wget -N -P ./data/" + location + " " + fullUrl;
             downloadFiles(command);
 
-            System.out.println(fullUrl);
-            System.out.println("wget executed at above url. Current time is :: " + new Date());
+            logger.info(fullUrl);
+            logger.info("wget executed at above url. Current time is :: " + new Date());
         }
-
     }
-
 
     public void downloadAllforLocation(){
 
@@ -56,6 +57,7 @@ public class Downloader {
         locations.add("highcliffe");
         locations.add("portland");
 
+        logger.info("STARTING DOWNLOAD ALL FILES");
         for (String location : locations) {
 
             String urlPrefix = "http://www.weather-file.com/" + location + "/data/";
@@ -77,9 +79,10 @@ public class Downloader {
                         fullUrl = urlPrefix + filedate + urlPostFix;
 
                         String command = "wget -N -P ./data/" + location + " " + fullUrl;
-                        //downloadFiles(command);
+                        downloadFiles(command);
 
-                        System.out.println(fullUrl);
+                        logger.info(fullUrl);
+                        logger.info("wget executed at above url. Current time is :: " + new Date());
 
                     }
                 }
@@ -99,7 +102,4 @@ public class Downloader {
             t.printStackTrace();
         }
     }
-
-
-
 }

@@ -8,7 +8,26 @@ public class App {
     final static Logger logger = Logger.getLogger(App.class);
 
     public static void main(String args[]){
-        logger.info("RAW DATA DOWNLOADER APPLICATION STARTING");
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/application-context.xml");
+
+        String argument = "";
+
+        if (args.length > 0) {
+             argument = (args[0]);
+        } else {
+            System.err.println("Arguments required, see usage document");
+            System.exit(1);
+        }
+
+        if (argument.equals("downloadLatestFiles")){
+            logger.info("ARGUMENT = downloadLatestFiles");
+            logger.info("RAW DATA DOWNLOADER APPLICATION STARTING -- downloadLatestFiles");
+            ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/downloadLatestFiles-application-context.xml");
+        } else if (argument.equals("downloadAllFiles")){
+            logger.info("ARGUMENT = downloadAllFiles");
+            logger.info("RAW DATA DOWNLOADER APPLICATION STARTING -- downloadAllFiles");
+            ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:spring/downloadAllFiles-application-context.xml");
+        }
+
+
     }
 }

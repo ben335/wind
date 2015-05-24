@@ -48,7 +48,7 @@ public class Downloader {
         }
     }
 
-    public void downloadAllforLocation(){
+    public void downloadAllFiles(){
 
         List<String> locations = new ArrayList<String>();
         locations.add("lymington");

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.bg.wind.datapersistance.domain.WindReading" table="WINDREADING">
+        <id name="readingId" column="READING_ID"/>
+        <property name="dateOfReading" column="LOCAL_DATE_OF_READING" type="java.sql.Date" />
+        <property name="timeOfReading" column="LOCAL_TIME_OF_READING" type="java.sql.Time" />
+        <property name="back_twd" column="BACKED_TWD" type="java.lang.Integer"/>
+        <property name="avg_twd" column="AVG_TWD" type="java.lang.Integer"/>
+        <property name="veer_twd" column="VEERED_TWD" type="java.lang.Integer"/>
+        <property name="min_tws" column="MIN_TWS" type="java.lang.Double"/>
+        <property name="avg_tws" column="AVG_TWS" type="java.lang.Double"/>
+        <property name="max_tws" column="MAX_TWS" type="java.lang.Double"/>
+        <property name="sampleSize" column="SAMPLE_SIZE" type="java.lang.Integer"/>
+        <property name="stationId" column="STATION_ID" type="java.lang.Integer"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<bean id="WindDataReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+
+    <!-- <property name="resource" value="file:./sample.csv" /> -->
+    <property name="resource" value="file:#{jobParameters['inputFile']}" />
+
+    <property name="linesToSkip" value="1" />
+
+    <property name="lineMapper">
+        <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+
+            <property name="lineTokenizer">
+                <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+                    <property name="names" value="date,time,back_twd,avg_twd,veer_twd,min_tws,avg_tws,max_tws,sampleSize" />
+                </bean>
+            </property>
+
+            <property name="fieldSetMapper">
+                <bean class="org.bg.wind.datapersistance.WindReadingFiledSetMapper" />
+            </property>
+        </bean>
+    </property>
+</bean>
